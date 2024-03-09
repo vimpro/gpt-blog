@@ -1,0 +1,34 @@
+<!-- templates/main.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Searching "{{ search }}"</title>
+
+    <script defer>
+        document.querySelector('form').onsubmit = function() {
+            var searchValue = document.querySelector('input[name="query"]').value;
+            this.action += encodeURIComponent(searchValue);
+        };
+    </script>
+</head>
+
+<body>
+    <a href="/">Home</a>
+    <form action="/search/" method="get">
+        <input type="text" name="query" placeholder="Search GPT blog...">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for item in articles_list %}
+        <li>
+            <a href="/blog/{{ item }}">
+                {{ item }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
